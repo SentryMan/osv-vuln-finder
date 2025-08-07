@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.avaje</groupId>
+    <artifactId>avaje-jex-parent</artifactId>
+    <version>3.3-RC3</version>
+  </parent>
+  <groupId>com.jojo</groupId>
+  <artifactId>vuln-analyzer</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.release>24</maven.compiler.release>
+    <maven.compiler.proc>full</maven.compiler.proc>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>5.12.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.avaje</groupId>
+      <artifactId>avaje-http-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.avaje</groupId>
+      <artifactId>avaje-http-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.avaje</groupId>
+      <artifactId>avaje-jsonb</artifactId>
+    </dependency>
+
+
+    <!-- Annotation processors-->
+    <dependency>
+      <groupId>io.avaje</groupId>
+      <artifactId>avaje-http-client-generator</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.avaje</groupId>
+      <artifactId>avaje-jsonb-generator</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.spotify.fmt</groupId>
+        <artifactId>fmt-maven-plugin</artifactId>
+        <version>2.27</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>format</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>com.jojo.vuln.analyzer.ProjectCveFinder</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
